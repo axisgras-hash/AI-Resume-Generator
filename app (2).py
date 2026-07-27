@@ -96,7 +96,6 @@ def resume_maker_prompt():
     prompt = f.read()
   return prompt
 
-resume_maker_prompt()
 # ===========GENERATE RESUME========
 prompt = """You are a helpful AI assistant
 with job resume maker, your task is to give
