@@ -118,11 +118,12 @@ if st.sidebar.button("Change App UI"):
     with open(file_name, 'r') as f:
         data = f.read()
     prompt = f"""Your taks is to pick this code and give 
-    updated UI UX with Dynamic Professional Design, Don't change any existing given code, just give updated
-    streamlit ui ux.
-    Original Code: {data}"""
+            updated UI UX with Dynamic Professional Design, Don't change any existing given code, just give updated
+            streamlit ui ux.
+            Original Code: {data}
+            """
     
-    st.download_button(
+    st.sidebar.download_button(
     label="Download file",
     data=data,
     file_name="app.py",
