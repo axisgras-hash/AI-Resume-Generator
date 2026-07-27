@@ -119,6 +119,7 @@ if st.sidebar.button("Change App UI"):
         data = f.read()
     prompt = f"""Your taks is to pick this code and give 
             updated UI UX with Dynamic Professional Design, Don't change any existing given code, just give updated
+            start any message or output with comments because I'll be directly dumping response in.py file
             streamlit ui ux.
             Original Code: {data}
             """
