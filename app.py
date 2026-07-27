@@ -114,6 +114,7 @@ query = final_prompt + user_details
 
 
 if st.sidebar.button("Change App UI"):
+    file_name = 'app.py'
     with open(file_name, 'r') as f:
         data = f.read()
     prompt = f"""Your taks is to pick this code and give 
@@ -127,7 +128,6 @@ if st.sidebar.button("Change App UI"):
     file_name="app.py",
     mime="text/plain")
     response = model.invoke(prompt)
-    file_name = 'app.py'
     with open(file_name, 'w') as f:
         f.write(response.content[-1]['text'])
 
