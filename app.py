@@ -131,7 +131,7 @@ if st.sidebar.button("Change App UI"):
     mime="text/plain")
     response = model.invoke(prompt)
     with open(file_name, 'w') as f:
-        f.write(response.content[-1]['text'])
+        f.write(response.content[-1]['text'].split('```')[6:])
 
 
 if st.button("Generate Resume"):
