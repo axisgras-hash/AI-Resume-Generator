@@ -34,6 +34,7 @@ TAVILY_API_KEY = st.sidebar.text_input("TAVILY_API_KEY",type="password")
 
 if not (GOOGLE_API_KEY) and not (GROQ_API_KEY ) and not (TAVILY_API_KEY):
     st.sidebar.warning("PASS API KEYS")
+    st.stop()
 
 # ===============MODEL BUILDING=============
 model = ChatGoogleGenerativeAI(
