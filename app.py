@@ -91,7 +91,7 @@ def prompt_generator(agent = agent):
     f.write(response.content[-1]['text'])
   return "Prompt file generated Successfully, agent can read it"
 
-
+prompt_generator(agent)
 # tool 2:
 def resume_maker_prompt():
   """This function just gives
