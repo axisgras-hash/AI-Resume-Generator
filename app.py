@@ -1,9 +1,4 @@
-import streamlit as st
-from PIL import Image
-# steream lit is web based pyhton frame work 
-st.title ("AI RESUME MAKER & JOB APPLY AGENT")
-st.image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrGg1PzVvppycJgP2W8V_0eYflg5xcVNxXXYn3OlOGUP6JDnu9O_SZnks&s=10",
-        width=300)
+
 # st.markdown("""## user can create or download resume based on high ats score """)
 #=============================agent code :))=======================================
 import os
@@ -18,10 +13,19 @@ from langchain.messages import SystemMessage , HumanMessage
 import numpy as np
 import streamlit as st
 from langchain_community.document_loaders import PyMuPDFLoader
+from PIL import Image
+import base64
+st.set_page_config(layout="wide") 
+
+# steream lit is web based pyhton frame work 
+st.title ("AI RESUME MAKER & JOB APPLY AGENT")
+st.image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrGg1PzVvppycJgP2W8V_0eYflg5xcVNxXXYn3OlOGUP6JDnu9O_SZnks&s=10",
+        width=300)
 # api keys
 GOOGLE= st.sidebar.text_input("GEMINI",type="password")
 GROQ= st.sidebar.text_input("GROQ",type="password")
 TAVILY =st.sidebar.text_input("TAVILY",type="password")
+
 if not (GOOGLE) and not (GROQ) and not (TAVILY):
     st.sidebar.warning("pass api keys")
     st.stop()
@@ -86,7 +90,9 @@ if FILE is not None:
     try:
         image = Image.open(FILE)
 
-        st.sidebar.image(image, caption="Uploaded Image", use_container_width=True)
+        st.sidebar.image(image, 
+                         caption="Uploaded Image", 
+                         use_container_width=True)
 
         if image.mode in ("RGBA", "P"):
             image = image.convert("RGB")
@@ -94,9 +100,7 @@ if FILE is not None:
         base_name = os.path.splitext(FILE.name)[0]
         save_path = f"{base_name}.jpg"
 
-        # 3. Save the image to the current working directory
         image.save(save_path, "JPEG")
-
         st.sidebar.success(f"🎉 Image successfully saved as `{save_path}`!")
 
     except Exception as e:
@@ -112,16 +116,20 @@ final_prompt=prompt+resume()
 
 USER_INFO=st.text_area("ENTER YOUR INFORMATION")
 
-user_details=f"""user details:given beow :resume info {USER_INFO} DEFAULT IF NOT GIVEN : PYTHON DEVELOPER RESUME """
+user_details=f"""user details:given below :
+resume info {USER_INFO} 
+DEFAULT IF NOT GIVEN : PYTHON DEVELOPER RESUME"""
+
 query = final_prompt+user_details
 
-import base64
+
 
 OPTIONS = ["DELHI","NOIDA","GURGAON/GURUGRAM",
           'KANPUR','LUCKNOW','BANGLORE','PUNE']
            
 LOCATION = st.sidebar.multiselect('SELECT LOCATION: ',
                                     options = OPTIONS )
+
 JOB_PROFILE = ["PYTHON DEVELOPER",'GEN AI',
                 'FULL-STACK DEVELOPER','DATA ANALYST']
 
@@ -144,22 +152,18 @@ if st.button('generate resume'):
   with st.spinner("Running Agent"):
 
     response = agent.invoke({'messages': [{'role':'user','content':query}]})
-    print(response['messages'][-1].content)
     code=response['messages'][-1].content[-1]['text']
-
-    # swap in the actual uploaded photo instead of the placeholder tag
+          
     if FILE is not None:
         with open(save_path, "rb") as img_file:
             b64_image = base64.b64encode(img_file.read()).decode()
         data_uri = f"data:image/jpeg;base64,{b64_image}"
         code = code.replace("PROFILE_IMAGE_PLACEHOLDER", data_uri)
 
-    
-
     st.html(code , width="stretch" , unsafe_allow_javascript=True)
-
+          
+# ================ APPLY LIVE JOBS======================
     st.divider()
     response = agent.invoke({'messages':[{'role':'user','content':job_prompt}]})
-    
     job_code = response['messages'][-1].content[-1]['text']
     st.html(job_code , width="stretch" , unsafe_allow_javascript=True)
