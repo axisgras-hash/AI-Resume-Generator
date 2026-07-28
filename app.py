@@ -11,7 +11,6 @@ Score""")
 
 #==================AGENT CODE===================
 # Step 2: Load Modules
-import IPython as ip
 import os
 import time
 import langchain
