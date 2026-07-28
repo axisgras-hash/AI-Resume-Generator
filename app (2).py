@@ -36,6 +36,8 @@ if not (GOOGLE_API_KEY) and not (GROQ_API_KEY ) and not (TAVILY_API_KEY):
     st.write("HELLO")
     st.sidebar.warning("PASS API KEYS")
     st.stop()
+else:
+    st.write("ELSE CODE")
 
 # ===============MODEL BUILDING=============
 model = ChatGoogleGenerativeAI(
