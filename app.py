@@ -139,7 +139,7 @@ apply link and OUTPUT must be In HTML no markdowns"""
 
 
 if st.button('generate resume'):
-  with st.spinner("runnign agent"):
+  with st.spinner("Running Agent"):
 
     response = agent.invoke({'messages': [{'role':'user','content':query}]})
     print(response['messages'][-1].content)
