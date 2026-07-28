@@ -142,29 +142,32 @@ user_info = st.text_input("Enter your information")
 user_details = f"""user details: given below:
 Resume info: {user_info}
 Photo: {uploaded_file }
+Photo present in current directory with name as 
+uploaded_file, and once resume generated give
+download button in same html code.
 Default if not given: Give Python Developer Resume"""
 
 
 
 query = final_prompt + user_details
 
-if st.sidebar.button("Change App UI"):
-    with open(file_name, 'r') as f:
-        data = f.read()
-    prompt = f"""Your taks is to pick this code and give 
-    updated UI UX with Dynamic Professional Design, Don't change any existing given code, just give updated
-    streamlit ui ux.
-    Original Code: {data}"""
+# if st.sidebar.button("Change App UI"):
+#     with open(file_name, 'r') as f:
+#         data = f.read()
+#     prompt = f"""Your taks is to pick this code and give 
+#     updated UI UX with Dynamic Professional Design, Don't change any existing given code, just give updated
+#     streamlit ui ux.
+#     Original Code: {data}"""
     
-    st.download_button(
-    label="Download file",
-    data=data,
-    file_name="app.py",
-    mime="text/plain")
-    response = model.invoke(prompt)
-    file_name = 'app.py'
-    with open(file_name, 'w') as f:
-        f.write(response.content[-1]['text'])
+#     st.download_button(
+#     label="Download file",
+#     data=data,
+#     file_name="app.py",
+#     mime="text/plain")
+#     response = model.invoke(prompt)
+#     file_name = 'app.py'
+#     with open(file_name, 'w') as f:
+#         f.write(response.content[-1]['text'])
 
 
 if st.button("Generate Resume"):
