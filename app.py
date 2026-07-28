@@ -1,8 +1,8 @@
 import streamlit as st
 from PIL import Image
 # steream lit is web based pyhton frame work 
-st.title ("AI RESUME MAKER and JOB APPLY AGENT")
-st.markdown("""##user can create or download resume based on high ats score """)
+st.title ("AI RESUME MAKER & JOB APPLY AGENT")
+st.markdown("""## user can create or download resume based on high ats score """)
 #=============================agent code :))=======================================
 import os
 import time
