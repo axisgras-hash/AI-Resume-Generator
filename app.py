@@ -41,7 +41,7 @@ else:
 
 # ===============MODEL BUILDING=============
 model = ChatGoogleGenerativeAI(
-    model = 'gemini-3.5-flash-lite',
+    model = 'gemini-2.5-flash',
     google_api_key = GOOGLE_API_KEY
 )
 
