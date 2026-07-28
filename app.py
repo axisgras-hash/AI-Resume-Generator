@@ -36,7 +36,7 @@ if not (GOOGLE_API_KEY) and not (GROQ_API_KEY ) and not (TAVILY_API_KEY):
     st.sidebar.warning("PASS API KEYS")
     st.stop()
 else:
-    st.write("ELSE CODE")
+    st.success("API KEYS LOADED")
 
 # ===============MODEL BUILDING=============
 model = ChatGoogleGenerativeAI(
@@ -112,7 +112,7 @@ if uploaded_file is not None:
     try:
         image = Image.open(uploaded_file)
         
-        st.image(image, caption="Uploaded Image", use_container_width=True)
+        st.sidebar.image(image, caption="Uploaded Image", use_container_width=True)
         
         if image.mode in ("RGBA", "P"):
             image = image.convert("RGB")
